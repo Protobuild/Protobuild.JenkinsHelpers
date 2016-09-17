@@ -1,10 +1,11 @@
 import org.protobuild.ProtobuildBuilder
 
 def call(name, url) {
-  stage(name) {
-    def platforms = [:]
+  //stage(name) {
+    //def platforms = [:]
 
-    platforms['linux'] = {
+    //platforms['linux'] = {
+    stage(name + ": Linux") {
       node('linux') {
         timeout(30) {
           checkout poll: true, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: name], [$class: 'CleanCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2a0f2367-7be2-419f-9b0f-b55c3305dea0', url: url]]]
@@ -12,8 +13,10 @@ def call(name, url) {
         }
       }
     }
+    //}
 
-    platforms['mac'] = {
+    //platforms['mac'] = {
+    stage(name + ": Mac") {
       node('mac') {
         timeout(30) {
           checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: name], [$class: 'CleanCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2a0f2367-7be2-419f-9b0f-b55c3305dea0', url: url]]]
@@ -21,8 +24,10 @@ def call(name, url) {
         }
       }
     }
+    //}
 
-    platforms['windows'] = {
+    //platforms['windows'] = {
+    stage(name + ": Windows") {
       node('windows') {
         timeout(30) {
           checkout poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: name], [$class: 'CleanCheckout']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2a0f2367-7be2-419f-9b0f-b55c3305dea0', url: url]]]
@@ -30,7 +35,8 @@ def call(name, url) {
         }
       }
     }
+    //}
 
-    parallel platforms
+    //parallel platforms
   }
 }
