@@ -9,7 +9,7 @@ def call(name, url) {
       node('linux') {
         timeout(30) {
           checkout poll: true, changelog: true, scm: scm
-          sh ("cd " + name + " && mono Protobuild.exe --automated-build")
+          sh ("mono Protobuild.exe --automated-build")
         }
       }
     }
@@ -20,7 +20,7 @@ def call(name, url) {
       node('mac') {
         timeout(30) {
           checkout poll: false, changelog: false, scm: scm
-          sh ("cd " + name + " && /usr/local/bin/mono Protobuild.exe --automated-build")
+          sh ("/usr/local/bin/mono Protobuild.exe --automated-build")
         }
       }
     }
@@ -31,7 +31,7 @@ def call(name, url) {
       node('windows') {
         timeout(30) {
           checkout poll: false, changelog: false, scm: scm
-          bat ('cd ' + name + ' && Protobuild.exe --automated-build')
+          bat ('Protobuild.exe --automated-build')
         }
       }
     }
