@@ -1,0 +1,3 @@
+Builds a Protobuild module located in the current directory.
+
+This script will also search for module dependencies and make them build triggers for this project.
