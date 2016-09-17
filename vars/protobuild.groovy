@@ -38,5 +38,5 @@ def call(name, url) {
     //}
 
     //parallel platforms
-  }
+  //}
 }
