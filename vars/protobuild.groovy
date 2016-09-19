@@ -1,12 +1,12 @@
 import org.protobuild.ProtobuildBuilder
 
-def call() {
-  stage("Linux") {
-    node('linux') {
+def call() {  
+  stage("Windows") {
+    node('windows') {
       timeout(30) {
-        checkout poll: true, changelog: true, scm: scm
-        sh ("mono Protobuild.exe --upgrade-all")
-        sh ("mono Protobuild.exe --automated-build")
+        checkout poll: false, changelog: false, scm: scm
+        bat ("Protobuild.exe --upgrade-all")
+        bat ('Protobuild.exe --automated-build')
       }
     }
   }
@@ -20,13 +20,13 @@ def call() {
       }
     }
   }
-    
-  stage("Windows") {
-    node('windows') {
+
+  stage("Linux") {
+    node('linux') {
       timeout(30) {
-        checkout poll: false, changelog: false, scm: scm
-        bat ("Protobuild.exe --upgrade-all")
-        bat ('Protobuild.exe --automated-build')
+        checkout poll: true, changelog: true, scm: scm
+        sh ("mono Protobuild.exe --upgrade-all")
+        sh ("mono Protobuild.exe --automated-build")
       }
     }
   }
