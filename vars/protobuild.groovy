@@ -29,16 +29,15 @@ def call() {
   }
 
   stage("Unified") {
-    node('linux') {
+    node('windows') {
       // Ensure a seperate working directory to the normal linux node above.
       ws {
         checkout poll: true, changelog: true, scm: scm
         if (fileExists('unified.build')) {
-          sh ("mono Protobuild.exe --upgrade-all")
           unstash 'windows-packages'
           unstash 'mac-packages'
           unstash 'linux-packages'
-          sh ("mono Protobuild.exe --automated-build unified.build")
+          bat ("Protobuild.exe --automated-build unified.build")
         }
       }
     }
