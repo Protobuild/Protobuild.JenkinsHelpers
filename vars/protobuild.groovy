@@ -20,7 +20,7 @@ def call(name, url) {
       node('mac') {
         timeout(30) {
           checkout poll: false, changelog: false, scm: scm
-          sh ("/usr/local/bin/mono Protobuild.exe --automated-build")
+          sh ("mono Protobuild.exe --automated-build")
         }
       }
     }
